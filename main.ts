@@ -1,26 +1,22 @@
-class Stack<T> { 
-  private value: T[];
-  constructor() {
-    this.value = [];
-  }
-  
-  push(x: T): void {
-    this.value.push(x)
-  }
-  pop(): T | undefined {
-    return this.value.pop();
-  }
-  size(): number {
-    return this.value.length;
+type Shape = {kind: "circle", radius: number} | {kind: "square", side: number}
+function area(s: Shape): number {
+  switch (s.kind) {
+    case "circle": return Math.PI * s.radius ** 2;
+    case "square": return s.side ** 2;
   }
 }
 
 const readline = require("readline");
 const rl = readline.createInterface({ input: process.stdin });
+const lines: string[] = [];
 rl.on("line", (line: string) => {
-    const stack = new Stack<number>();
-    line.split(" ").map(Number).forEach(n => stack.push(n));
-    while (stack.size() > 0) console.log(stack.pop());
-    rl.close();
+    lines.push(line);
+  if (lines.length === 2) {
+        const kind = lines[0];
+        const dim = Number(lines[1]);
+        const s: Shape = kind === "circle" ? { kind: "circle", radius: dim } : { kind: "square", side: dim };
+        console.log(area(s).toFixed(2));
+        rl.close();
+    }
 });
 rl.on("close", () => process.exit(0));
