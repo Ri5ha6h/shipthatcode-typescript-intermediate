@@ -1,11 +1,26 @@
-// class Stack<T> { ... }
+class Stack<T> { 
+  private value: T[];
+  constructor() {
+    this.value = [];
+  }
+  
+  push(x: T): void {
+    this.value.push(x)
+  }
+  pop(): T | undefined {
+    return this.value.pop();
+  }
+  size(): number {
+    return this.value.length;
+  }
+}
 
 const readline = require("readline");
 const rl = readline.createInterface({ input: process.stdin });
 rl.on("line", (line: string) => {
-    // const stack = new Stack<number>();
-    // line.split(" ").map(Number).forEach(n => stack.push(n));
-    // while (stack.size() > 0) console.log(stack.pop());
+    const stack = new Stack<number>();
+    line.split(" ").map(Number).forEach(n => stack.push(n));
+    while (stack.size() > 0) console.log(stack.pop());
     rl.close();
 });
 rl.on("close", () => process.exit(0));
